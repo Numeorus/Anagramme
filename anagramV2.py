@@ -12,28 +12,27 @@ def compareLetters (pattern, toCompare):
 	return True
 
 #main function
+import linecache
 wordList=[]
 
-with open('wordlist.txt') as openfileobject:
-    for line in openfileobject:
-        wordList.append(line)
-
 n=1
-while True:
+fd=open("wordlist.txt","r")
+
+with open('wordlist.txt') as f:
+    fileSize=sum(1 for _ in f)
+
+for i in range (1,fileSize):
 	status=0
-	if len(wordList)==0:
-		break
-	tmpWord=wordList[0]
-	del wordList[0]
-	stOut=str(n)+':'+tmpWord
-	for currentWord in wordList:
-		if len(tmpWord)==len(currentWord):
-			if compareLetters(tmpWord,currentWord)==True:
+	line=linecache.getline("wordlist.txt", i)
+	stOut=str(n)+':'+line
+	for j in range(i,fileSize):
+		currentWord=linecache.getline("wordlist.txt", j)
+		if len(line)==len(currentWord):
+			if compareLetters(line,currentWord)==True:
 				stOut+=" "+currentWord
 				del currentWord
 				status=1
-	
+
 	if status==1:
 		print stOut
 		n+=1
-	break
