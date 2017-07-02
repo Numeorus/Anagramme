@@ -25,7 +25,7 @@ for i in range (1,fileSize):
 	status=0
 	line=linecache.getline("wordlist.txt", i)
 	stOut=str(n)+':'+line
-	for j in range(i,fileSize):
+	for j in range(i+1,fileSize):
 		currentWord=linecache.getline("wordlist.txt", j)
 		if len(line)==len(currentWord):
 			if compareLetters(line,currentWord)==True:
@@ -36,3 +36,4 @@ for i in range (1,fileSize):
 	if status==1:
 		print stOut
 		n+=1
+	print i
